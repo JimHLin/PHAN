@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Jim's demo</title>
+    <title>PHAN</title>
     <meta name="comp1930 boilerplate code" content="my bcit project">
     <meta name="author" content="BCIT">
 
@@ -28,40 +28,96 @@
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
-          apiKey: "AIzaSyAV_BwZomzyJvfN1kQgx_xdCR10h33qaTc",
-          authDomain: "phan-fde9a.firebaseapp.com",
-          databaseURL: "https://phan-fde9a.firebaseio.com",
-          projectId: "phan-fde9a",
-          storageBucket: "phan-fde9a.appspot.com",
-          messagingSenderId: "948065763151",
-          appId: "1:948065763151:web:1a00bcb2d0a576f7664f3a"
+            apiKey: "AIzaSyAV_BwZomzyJvfN1kQgx_xdCR10h33qaTc",
+            authDomain: "phan-fde9a.firebaseapp.com",
+            databaseURL: "https://phan-fde9a.firebaseio.com",
+            projectId: "phan-fde9a",
+            storageBucket: "phan-fde9a.appspot.com",
+            messagingSenderId: "948065763151",
+            appId: "1:948065763151:web:1a00bcb2d0a576f7664f3a"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         var db = firebase.firestore();
     </script>
+    <style>
+        * {
+            padding: 2%;
+        }
 
+        #button1 {
+            margin-top: 5%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #value {
+            display: block;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #title,
+        #data {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Welcome to Jim's Amazing App.</h1>
-    <h2>Hello CST it's Thursday.</h2>
-    <h3>Let's read from the database: <span id = "stuff">stuff</span></h3>
-    <input type = "String" id = "value">
-    <button id = "button1">Submit</button>
-    <script>db.collection('users').doc('sampleUser').onSnapshot(function(snap){
-    console.log('Current data is...', snap.data());
-    document.getElementById("stuff").innerHTML = snap.data().name;
-    });
+    <h1 id="title">PHAN</h1>
+    <div id="data">
+        <h3>Let's read from the database:<br><span id="stuff">stuff</span></h3>
+    </div>
+    <input type="number" id="value">
+    <button id="button1">Submit</button>
+    <script src="scripts/create_user.js"></script>
+    <script src="scripts/app.js"></script>
+    <script>
+        createUser();
     </script>
     <script>
-    $(button1).click(function(change){
-        // alert("You changed some stuff!"),
-        db.collection('users').doc('sampleUser').set(
-            {
-            "name": document.getElementById("value").value,
-            },{ merge: true });
-    })</script>
+        updateTimeC();
+    </script>
+    <script>
+        var counts = 0;
+        firebase.auth().onAuthStateChanged(function (user) {
+
+            db.collection('users').doc(user.uid).onSnapshot(function (snap) {
+
+                if (snap.get("counts") != null) {
+                    counts = snap.get("counts");
+                }
+            });
+        });
+        $(button1).click(function updateTimeS(time) {
+            //Make sure user has a value already.
+            firebase.auth().onAuthStateChanged(function (user) {
+
+                //sets new value for time for time as the value in the input.
+                db.collection('users').doc(user.uid).set({
+                    "counts": (parseInt(counts) + parseInt(document.getElementById("value").value)),
+                }, {
+                    merge: true
+                });
+
+
+
+
+            });
+        });
+        //Convenience.
+        document.getElementById("value").addEventListener("keydown", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                $(button1).click();
+            }
+
+
+        })
+    </script>
 
 </body>
 
