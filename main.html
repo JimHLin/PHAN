@@ -1,0 +1,69 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Jim's demo</title>
+    <meta name="comp1930 boilerplate code" content="my bcit project">
+    <meta name="author" content="BCIT">
+
+    <!-- Bootstrap for Mobile-first -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+    <!-- The Firebase Authentication UI Library -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <!-- Initialize Firebase -->
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyAV_BwZomzyJvfN1kQgx_xdCR10h33qaTc",
+          authDomain: "phan-fde9a.firebaseapp.com",
+          databaseURL: "https://phan-fde9a.firebaseio.com",
+          projectId: "phan-fde9a",
+          storageBucket: "phan-fde9a.appspot.com",
+          messagingSenderId: "948065763151",
+          appId: "1:948065763151:web:1a00bcb2d0a576f7664f3a"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+    </script>
+
+</head>
+
+<body>
+    <h1>Welcome to Jim's Amazing App.</h1>
+    <h2>Hello CST it's Thursday.</h2>
+    <h3>Let's read from the database: <span id = "stuff">stuff</span></h3>
+    <input type = "String" id = "value">
+    <button id = "button1">Submit</button>
+    <script>db.collection('users').doc('sampleUser').onSnapshot(function(snap){
+    console.log('Current data is...', snap.data());
+    document.getElementById("stuff").innerHTML = snap.data().name;
+    });
+    </script>
+    <script>
+    $(button1).click(function(change){
+        // alert("You changed some stuff!"),
+        db.collection('users').doc('sampleUser').set(
+            {
+            "name": document.getElementById("value").value,
+            },{ merge: true });
+    })</script>
+
+</body>
+
+
+</html>
