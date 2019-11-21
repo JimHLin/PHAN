@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>COMP 1536 Lab 6</title>
+    <meta charset="utf-8"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+        #menu-icon {
+            float: left;
+            padding-left: 0px;
+        }
+        #menu-icon:hover {
+            cursor: pointer;
+        }
+        
+        #menu ul {
+            padding-left: .5em;
+        }
+        
+        }
+        #section {
+            font-size: 14pt;
+            width: calc(100% - 200px);
+            height: 100%;
+        }
+        #tooltip-container {
+            position: absolute;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            display: none;
+            border: 2px solid;
+            border-radius: 15px;
+            clear: left;
+        }
+    </style>
+    </head>
+    
+        <div id="section">
+            <img id="menu-icon" src="img/menu.png" width="60px" height="60px" />
+        </div>
+    <div id="tooltip-container">Click to see the menu.</div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>
+            var showMenu = false;
+
+            $(document).ready(function() {
+                
+            var heading = $("<head></head>");   
+            var p1 = $("<p>Home</p>");
+            var p2 = $("<p><b>Mark Zuckerburg</b></p>");
+            var p3 = $("<p>Facebook steals your data lol<br><br></p>");
+            var button = $("<span>Follow</span>");
+            var block1 = $("<span>yesterday<br><br>I can see your photos...<br>all your photos...<br>I mean ALL...<br><br></span>");
+            var block2 = $("<span>2 days ago<br><br>Mark uploaded 4 new photos.<br><br></span>");
+            var heart = $("<img src='img/heart.png' width='60px' height='50px'>  88&ensp;&ensp;</img>");
+            var settings = $("<img src='img/settings.png' width='60px' height='60px'/>");
+            var comment = $("<img src='img/comment.png' width='60px' height='50px' display='inline'>  72</img>");
+            var h = $("<img src='img/grey heart.png' width='60px' height='60px'>  33&ensp;&ensp;</img>");
+            var c = $("<img src='img/comment.png' width='60px' height='60px'>  69</img>");
+            var pic1 = $("<img src='img/upload1.jpg' width='145px' height='120px'>&ensp;&ensp;</img>"); 
+            var pic2 = $("<img src='img/upload2.jpg' width='145px' height='120px'>&ensp;&ensp;</img>"); 
+            var pic3 = $("<img src='img/upload3.jpg' width='145px' height='120px'>&ensp;&ensp;</img>"); 
+            var pic4 = $("<img src='img/upload4.jpg' width='145px' height='120px'/><br><br>");     
+            var jessica = $("<img src='img/dp.jpg' width='220px' height='250px'/>");
+        
+                
+            $("body").css({"color":"white", "fontFamily":"Roboto", "textAlign":"center", "font-size":"30pt"});
+            $(settings).css("float","right");
+                
+            $("body").append(p1,settings);
+            $(jessica).css({"border-radius":"50%", "border":"2px solid white"});
+            $("body").append(jessica);
+            $("body").append(p2,p3);
+            $(button).css({"background-color":"yellow", "color":"black" , "padding":"10px" });
+            $("body").append(button);
+            $("body").css("backgroundColor", "lightblue");
+            $(block1).css({"background-color":"white", "color":"black" , "marginRight":"50px", "textAlign":"left", "display":"block", "padding":"30px", "marginLeft":"55px", "marginTop":"50px", "height":"400px", "font-size":"30pt"});
+            $(block1).append(heart,comment);
+            $("body").append(block1);
+            $(block2).css({"background-color":"white", "color":"black" , "marginRight":"50px", "textAlign":"left", "display":"block", "padding":"30px", "marginLeft":"55px", "marginTop":"50px", "height":"410px"});
+            $("body").append(block2);
+            $(block2).append(pic1,pic2,pic3,pic4);
+            $(block2).append(h,c);
+                
+                
+            var menuAnimationSlideIn = {
+                "left": "0px",
+                "easing": "swing"
+            };
+            var menuAnimationSlideOut = {
+                "left": "-200px",
+                "easing": "swing"
+            };
+            // when user clicks on the menu
+            $("#menu-icon").click(function (event) {
+                console.log("Event target: " + event.target);
+                if (!showMenu) {
+                    showMenu = true;
+                    $("#menu").animate(menuAnimationSlideIn, 300);
+
+                } else {
+                    showMenu = false;
+                    $("#menu").animate(menuAnimationSlideOut, 500);
+                }
+            });
+            // mouse hovered over
+            $("#menu-icon").mouseenter(function () {
+                var offset = $(this).offset();
+                var width = $(this).outerWidth();
+                $('#tooltip-container').css({
+                        "top": offset.top + 60,
+                        "left": offset.left - width + 50
+                    })
+                    .fadeIn().delay(1000).fadeOut();
+            });
+            // mouse left
+            $("#menu-icon").mouseleave(function () {
+                //console.log("mouse exit menu icon.");
+                var offset = $(this).offset();
+                var width = $(this).outerWidth();
+                $('#tooltip-container').css({
+                    "top": offset.top + 60,
+                    "left": offset.left - width + 50
+                }).fadeOut();
+            });
+       });
+        </script>
+    </body>
+</html>
