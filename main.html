@@ -45,7 +45,8 @@
             padding: 2%;
         }
 
-        #button1 {
+        #button1,
+        #clear {
             margin-top: 5%;
             display: block;
             margin-left: auto;
@@ -73,6 +74,7 @@
     </div>
     <input type="number" id="value">
     <button id="button1">Submit</button>
+    <button id="clear">Clear Time!</button>
     <script src="scripts/create_user.js"></script>
     <script src="scripts/app.js"></script>
     <script>
@@ -82,6 +84,16 @@
         updateTimeC();
     </script>
     <script>
+        $(clear).click(function clear() {
+            firebase.auth().onAuthStateChanged(function (user) {
+                db.collection('users').doc(user.uid).set({
+                    "counts": 0,
+                }, {
+                    merge: true
+
+                });
+            });
+        });
         var counts = 0;
         firebase.auth().onAuthStateChanged(function (user) {
 
@@ -93,12 +105,11 @@
             });
         });
         $(button1).click(function updateTimeS(time) {
-            //Make sure user has a value already.
             firebase.auth().onAuthStateChanged(function (user) {
 
-                //sets new value for time for time as the value in the input.
                 db.collection('users').doc(user.uid).set({
-                    "counts": (parseInt(counts) + parseInt(document.getElementById("value").value)),
+                    "counts": (parseInt(counts) + parseInt(document.getElementById("value")
+                        .value)),
                 }, {
                     merge: true
                 });
