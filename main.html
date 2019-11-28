@@ -45,14 +45,22 @@
             padding: 2%;
         }
 
-        #button1,
-        #clear {
+        #button1, #clear, #logout {
             margin-top: 5%;
             display: block;
             margin-left: auto;
             margin-right: auto;
         }
-
+        #logout, #instagram, #twitter, #youtube, #reddit, #facebook, #other{
+            width: 100px;
+            
+        }
+        #rads{
+            margin-top: 5%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto
+        }
         #value {
             display: block;
             text-align: center;
@@ -64,6 +72,23 @@
         #data {
             text-align: center;
         }
+        [type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  filter: grayscale(100%);
+    outline: 2px solid red;
+}
     </style>
 </head>
 
@@ -75,6 +100,35 @@
     <input type="number" id="value">
     <button id="button1">Submit</button>
     <button id="clear">Clear Time!</button>
+    <div id ="rads">
+<label>
+  <input id = "igrad" type="radio" name="test" value="small" >
+  <img id = "instagram" src="https://workingwithdog.com/wp-content/uploads/2016/05/new_instagram_logo-1024x1024.jpg">
+</label>
+    <label>
+  <input id = "ttrad" type="radio" name="test" value="small" >
+  <img id = "twitter" src="http://www.vectorsland.com/imgd/l62697-new-twitter-logo-49466.png">
+</label>
+    <label>
+  <input id = "rdrad" type="radio" name="test" value="small" >
+  <img id = "reddit" src="https://www.redditinc.com/assets/images/site/reddit-logo.png">
+</label>
+   
+    <label>
+  <input id = "ytrad" type="radio" name="test" value="small" >
+  <img id = "youtube" src="https://i.pinimg.com/originals/de/1c/91/de1c91788be0d791135736995109272a.png">
+</label>
+    <label>
+  <input id = "fbrad" type="radio" name="test" value="small">
+  <img id = "facebook" src="https://en.facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png">
+</label>
+        <label>
+          <input id = "otrad" type="radio" name="test" value="small" checked>
+  <img id = "other" src="https://cdn.pixabay.com/photo/2012/04/02/16/07/plus-24844_960_720.png">
+</label>
+    </div>
+    <div id = "test"><p id="para"></p></div>
+<input type="image" id = "logout" src="https://cdn.britannica.com/15/188715-050-94EA4753/Pablo-Escobar-1991.jpg" />
     <script src="scripts/create_user.js"></script>
     <script src="scripts/app.js"></script>
     <script>
@@ -82,52 +136,6 @@
     </script>
     <script>
         updateTimeC();
-    </script>
-    <script>
-        $(clear).click(function clear() {
-            firebase.auth().onAuthStateChanged(function (user) {
-                db.collection('users').doc(user.uid).set({
-                    "counts": 0,
-                }, {
-                    merge: true
-
-                });
-            });
-        });
-        var counts = 0;
-        firebase.auth().onAuthStateChanged(function (user) {
-
-            db.collection('users').doc(user.uid).onSnapshot(function (snap) {
-
-                if (snap.get("counts") != null) {
-                    counts = snap.get("counts");
-                }
-            });
-        });
-        $(button1).click(function updateTimeS(time) {
-            firebase.auth().onAuthStateChanged(function (user) {
-
-                db.collection('users').doc(user.uid).set({
-                    "counts": (parseInt(counts) + parseInt(document.getElementById("value")
-                        .value)),
-                }, {
-                    merge: true
-                });
-
-
-
-
-            });
-        });
-        //Convenience.
-        document.getElementById("value").addEventListener("keydown", function (event) {
-            if (event.keyCode === 13) {
-                event.preventDefault();
-                $(button1).click();
-            }
-
-
-        })
     </script>
 
 </body>

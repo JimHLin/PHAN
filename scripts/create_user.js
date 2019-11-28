@@ -14,12 +14,6 @@ function createUser() {
         "email":user.email,
         
         },{ merge: true });
-        if(boo){
-             db.collection("users").doc(user.uid).set(
-    	{
-        "counts":0, 
-        
-        },{ merge: true });
-        }
+       
     });
     });}
