@@ -1,0 +1,83 @@
+
+            #hamb{
+            width: 15%;
+            height: 15%;
+            display: block;
+            float: left;
+            }
+                
+            #dots{
+            width: 18%;
+            height: 18%;
+            display: block;
+            float: right;
+            }
+                
+            #header{
+            font-size: 10vw;
+            font-family: Alex Brush;
+            color: white;
+            margin: 0;
+            line-height: 20vw;
+            text-align: center;
+            }
+
+            #icon{
+            width: 65%;
+            height: 30%;
+            background-color: white;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2vw white solid;
+            border-radius: 2vw;
+            }
+                
+            #name{
+            font-size: 10vw;
+            text-align: center;
+            color: white;
+            font-family: Arial;
+            margin: 30px 0;
+            }
+           
+            #bio{
+            font-size: 4vw;
+            color: white;
+            font-family: Arial;
+            margin: 10vw;
+            text-align: center;
+            }
+
+            #box1{
+            width: 80%;
+            height: 70vw;
+            margin: auto;
+            background-color: white;
+            border-radius: 2vw;
+            }
+
+            #date1{
+            font-family: Arial;
+            font-size: 4vw;
+            padding: 5vw 6vw;
+            margin: 0;
+            }
+                
+            #info1{
+            font-family: Arial;
+            font-size: 4vw;
+            padding: 0 6vw;
+            margin: 0;
+            }
+
+            #body{
+            margin: 0;
+            height: 100%;
+            background-image: url(mainpage.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: rgba(240,94,135,1);
+            background-blend-mode: multiply;
+            background-attachment: fixed;
+            }
