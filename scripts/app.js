@@ -241,7 +241,11 @@ $("#Christmas").click(function () {
     $(body).css("color", "green");
     $("#bio").css("color", "green");
     $("#name").css("color", "green");
-    $(body).css("background-image", "url(./images/santa.jpg)");
+    var backstyle = {
+        "background-image": "url(./images/santa.jpg)",
+        "background-size" : "100%,100%"
+    };
+    $(body).css(backstyle);
 });
 $("#logout").click(function () {
     firebase.auth().onAuthStateChanged(function (user) {

@@ -1,4 +1,5 @@
 By Jim Lin and Puru Garg, Set D.
+
 This app tracks your app usage by manual input.
 More ambitious versions were attempted, but dropped due to time constraints.
 
