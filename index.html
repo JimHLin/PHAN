@@ -1,14 +1,35 @@
 <html>
 
 <head>
-    <style>
-        head {
-            background-color: deepskyblue
-        }
-    </style>
+<link rel="stylesheet" type="text/css" href="css/index.css" />     
     <title>PHAN</title>
-    <meta name="comp1930 boilerplate code" content="my bcit project">
-    <meta name="author" content="BCIT">
+    <!-- Bootstrap for Mobile-first, and JQuery -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Header Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="">PHAN</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="landing%20page.html">about us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://en.wikipedia.org/wiki/Moose">Learn about moose</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
 
     <!-- Bootstrap for Mobile-first -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,33 +48,44 @@
     <!-- Optional styles and scripts of your own 
    <link rel="stylesheet" href="styles/style.css">
     <script src="scripts/script.js"></script> -->
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyAV_BwZomzyJvfN1kQgx_xdCR10h33qaTc",
-    authDomain: "phan-fde9a.firebaseapp.com",
-    databaseURL: "https://phan-fde9a.firebaseio.com",
-    projectId: "phan-fde9a",
-    storageBucket: "phan-fde9a.appspot.com",
-    messagingSenderId: "948065763151",
-    appId: "1:948065763151:web:1a00bcb2d0a576f7664f3a"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAV_BwZomzyJvfN1kQgx_xdCR10h33qaTc",
+            authDomain: "phan-fde9a.firebaseapp.com",
+            databaseURL: "https://phan-fde9a.firebaseio.com",
+            projectId: "phan-fde9a",
+            storageBucket: "phan-fde9a.appspot.com",
+            messagingSenderId: "948065763151",
+            appId: "1:948065763151:web:1a00bcb2d0a576f7664f3a"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
     <style>
         #heyo {
             margin: 20px;
+            font-family: cursive;
+            font-size: 60px;
+            text-align: center;
+            color: black;
+        }
+
+        #hi {
+            font-size: 70px;
+            font-family: cursive;
+            text-align: center;
+            color: black;
         }
     </style>
 </head>
 
 <body>
-    
-    <h1 id="heyo">Welcome to PHAN</h1>
+    <center><img src="images/logo.png" margin="10px" width="350px" height="150px" border radius="2vw"></center>
+    <h1 id="heyo">Welcome to</h1>
+    <h1 id="hi"><b>PHAN</b></h1>
     <div id="firebaseui-auth-container"></div>
-    <div id="loader">Loading...</div>
-      <script src="scripts/create_user.js"></script>
+
 
     <script>
         // Initialize the FirebaseUI Widget using Firebase.
@@ -69,7 +101,6 @@
                 uiShown: function () {
                     // The widget is rendered.
                     // Hide the loader.
-                    document.getElementById('loader').style.display = 'none';
                 }
             },
             // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
@@ -92,6 +123,7 @@
         // The start method will wait until the DOM is loaded.
         ui.start('#firebaseui-auth-container', uiConfig);
     </script>
+
 </body>
 
 </html>

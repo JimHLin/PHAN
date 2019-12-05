@@ -1,14 +1,8 @@
-<!doctype html>
-
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <title>PHAN</title>
-    <meta name="comp1930 boilerplate code" content="my bcit project">
-    <meta name="author" content="BCIT">
-
-    <!-- Bootstrap for Mobile-first -->
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -41,104 +35,116 @@
         var db = firebase.firestore();
     </script>
     <style>
-        * {
-            padding: 2%;
-        }
 
-        #button1, #clear, #logout {
-            margin-top: 5%;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        #logout, #instagram, #twitter, #youtube, #reddit, #facebook, #other{
-            width: 100px;
-            
-        }
-        #rads{
-            margin-top: 5%;
-            display: block;
-            margin-left: auto;
-            margin-right: auto
-        }
-        #value {
-            display: block;
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #title,
-        #data {
-            text-align: center;
-        }
-        [type=radio] { 
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* IMAGE STYLES */
-[type=radio] + img {
-  cursor: pointer;
-}
-
-/* CHECKED STYLES */
-[type=radio]:checked + img {
-  filter: grayscale(100%);
-    outline: 2px solid red;
-}
     </style>
 </head>
 
-<body>
-    <h1 id="title">PHAN</h1>
-    <div id="data">
-        <h3>Let's read from the database:<br><span id="stuff">stuff</span></h3>
+<body id="body">
+
+    <!-- Header Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav">
+        <a class="navbar-brand" href="">PHAN</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="landing%20page.html">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="" id="logout">Log out</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://en.wikipedia.org/wiki/Moose">Learn about moose</a>
+                </li>
+                <li class="nav-item">
+                    <input type="image" src="images/christmas.jpeg" id="Christmas">
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <img id="icon" src="images/logo.png" alt="">
+
+    <p id="name">Let's Get Started!</p>
+
+    <p id="bio">PHAN is super easy to use. Just select the app you wanna keep a track of, and input the amount of time
+        you spent on it every time you use it. And that's all!</p>
+
+    <div id="box1">
+        <div id="data">
+            <h3>Total Time:<br><span id="stuff">0</span></h3>
+        </div>
+        <input type="number" id="value">
+        <button id="button1">Submit</button>
+        <button id="clear">Clear Time!</button>
+        <div id="rads">
+            <label id="iglab">
+                <input id="igrad" type="radio" name="rad">
+                <img id="instagram" src="images/instagram.png">
+            </label>
+            <label id="ttlab">
+                <input id="ttrad" type="radio" name="rad">
+                <img id="twitter" src="images/twitter.png">
+            </label>
+            <label id="rdlab">
+                <input id="rdrad" type="radio" name="rad">
+                <img id="reddit" src="images/reddit.png">
+            </label>
+
+            <label id="ytlab">
+                <input id="ytrad" type="radio" name="rad">
+                <img id="youtube" src="images/youtube.png">
+            </label>
+            <label id="fblab">
+                <input id="fbrad" type="radio" name="rad">
+                <img id="facebook" src="images/facebook.png">
+            </label>
+            <label id="otlab">
+                <input id="otrad" type="radio" name="rad" checked>
+                <img id="other" src="images/test.png">
+            </label>
+        </div>
+        <div id="results">
+            Total time spent : <span id="resall"></span>
+            <br /> <br />
+
+            <img id="ig" src="images/instagram.png">
+            : <span id="igshow"></span>
+
+            <div id="igbar"></div>
+            <img id="tt" src="images/twitter.png">
+            : <span id="ttshow"></span>
+            <div id="ttbar"></div>
+            <img id="rd" src="images/reddit.png">
+            : <span id="rdshow"></span>
+            <div id="rdbar"></div>
+            <img id="yt" src="images/youtube.png">
+            : <span id="ytshow"></span>
+            <div id="ytbar"></div>
+            <img id="fb" src="images/facebook.png">
+            : <span id="fbshow"></span>
+            <div id="fbbar"></div>
+            <input type="image" id="ot" src="images/others.png">
+            : <span id="otshow"></span>
+            <div id="otbar"></div>
+
+        </div>
+
+        <script src="scripts/create_user.js"></script>
+        <script src="scripts/app.js"></script>
+        <script>
+            createUser();
+        </script>
+        <script>
+            updateTimeC();
+        </script>
+
     </div>
-    <input type="number" id="value">
-    <button id="button1">Submit</button>
-    <button id="clear">Clear Time!</button>
-    <div id ="rads">
-<label>
-  <input id = "igrad" type="radio" name="test" value="small" >
-  <img id = "instagram" src="https://workingwithdog.com/wp-content/uploads/2016/05/new_instagram_logo-1024x1024.jpg">
-</label>
-    <label>
-  <input id = "ttrad" type="radio" name="test" value="small" >
-  <img id = "twitter" src="http://www.vectorsland.com/imgd/l62697-new-twitter-logo-49466.png">
-</label>
-    <label>
-  <input id = "rdrad" type="radio" name="test" value="small" >
-  <img id = "reddit" src="https://www.redditinc.com/assets/images/site/reddit-logo.png">
-</label>
-   
-    <label>
-  <input id = "ytrad" type="radio" name="test" value="small" >
-  <img id = "youtube" src="https://i.pinimg.com/originals/de/1c/91/de1c91788be0d791135736995109272a.png">
-</label>
-    <label>
-  <input id = "fbrad" type="radio" name="test" value="small">
-  <img id = "facebook" src="https://en.facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png">
-</label>
-        <label>
-          <input id = "otrad" type="radio" name="test" value="small" checked>
-  <img id = "other" src="https://cdn.pixabay.com/photo/2012/04/02/16/07/plus-24844_960_720.png">
-</label>
-    </div>
-    <div id = "test"><p id="para"></p></div>
-<input type="image" id = "logout" src="https://cdn.britannica.com/15/188715-050-94EA4753/Pablo-Escobar-1991.jpg" />
-    <script src="scripts/create_user.js"></script>
-    <script src="scripts/app.js"></script>
-    <script>
-        createUser();
-    </script>
-    <script>
-        updateTimeC();
-    </script>
+
 
 </body>
-
 
 </html>

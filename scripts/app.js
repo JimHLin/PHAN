@@ -2,12 +2,100 @@ function updateTimeC() {
     firebase.auth().onAuthStateChanged(function (user) {
         db.collection('users').doc(user.uid).onSnapshot(function (snap) {
             console.log('Current data is...', snap.data());
-            if (snap.get("counts") != null)
+            if (snap.get("counts") != null) {
                 txt = snap.data()["counts"];
-            else
-                txt = 0;
-            $("stuff").innerHTML = txt;
 
+            }
+            if (snap.get("counts") != null) {
+                txt = snap.data()["counts"];
+
+                if (snap.get("ttcounts") != null) {
+                    var tttxt = snap.data()["ttcounts"];
+                    per = ((tttxt / txt) * 100) + "%";
+                    style = {
+                        "position": "relative",
+                        "width": per
+                    };
+                    $("#ttshow").html(tttxt + "mins, or " + (tttxt / 60).toFixed(2) + " hrs. " + (tttxt / txt * 100).toFixed(2) + "% of total time.");
+                    $("#ttbar").css(style);
+                } else {
+                    ttttxt = 0;
+                    $("#ttbar").css("width", "0");
+                    $("#ttbar").css("width", "0%");
+                }
+                if (snap.get("ytcounts") != null) {
+                    var yttxt = snap.data()["ytcounts"];
+                    per = ((yttxt / txt) * 100) + "%";
+                    style = {
+                        "position": "relative",
+                        "width": per
+                    };
+                    $("#ytshow").html(yttxt + "mins, or " + (yttxt / 60).toFixed(2) + " hrs. " + (yttxt / txt * 100).toFixed(2) + "% of total time.");
+                    $("#ytbar").css(style);
+                } else {
+                    yttxt = 0;
+                    $("#ytbar").css("width", "0");
+                }
+                if (snap.get("igcounts") != null) {
+                    var igtxt = snap.data()["igcounts"];
+                    per = ((igtxt / txt) * 100) + "%";
+
+                    style = {
+                        "position": "relative",
+                        "width": per
+                    };
+                    $("#igshow").html(igtxt + "mins, or " + (igtxt / 60).toFixed(2) + " hrs. " + (igtxt / txt * 100).toFixed(2) + "% of total time.");
+                    $("#igbar").css(style);
+                } else {
+                    igtxt = 0;
+                    $("#igbar").css("width", "0");
+                }
+                if (snap.get("rdcounts") != null) {
+                    var rdtxt = snap.data()["rdcounts"];
+                    per = ((rdtxt / txt) * 100) + "%";
+                    style = {
+                        "position": "relative",
+                        "width": per
+                    };
+                    $("#rdshow").html(rdtxt + "mins, or " + (rdtxt / 60).toFixed(2) + " hrs. " + (rdtxt / txt * 100).toFixed(2) + "% of total time.");
+                    $("#rdbar").css(style);
+                } else {
+                    rdtxt = 0;
+                    $("#rdbar").css("width", "0");
+                }
+                if (snap.get("fbcounts") != null) {
+                    var fbtxt = snap.data()["fbcounts"];
+                    var per = ((fbtxt / txt) * 100) + "%";
+                    var style = {
+                        "position": "relative",
+                        "width": per
+                    };
+                    $("#fbshow").html(fbtxt + "mins, or " + (fbtxt / 60).toFixed(2) + " hrs. " + (fbtxt / txt * 100).toFixed(2) + "% of total time.");
+                    $("#fbbar").css(style);
+
+                } else {
+                    fbtxt = 0;
+                    $("#fbbar").css("width", "0");
+
+                }
+                if (snap.get("otcounts") != null) {
+                    ottxt = snap.data()["otcounts"];
+                    per = ((ottxt / txt) * 100) + "%";
+                    style = {
+                        "position": "relative",
+                        "width": per
+                    };
+                    $("#otshow").html(ottxt + "mins, or " + (ottxt / 60).toFixed(2) + " hrs. " + (ottxt / txt * 100).toFixed(2) + "% of total time.");
+                    $("#otbar").css(style);
+                } else {
+                    ottxt = 0;
+                    $("#otbar").css("width", "0");
+                }
+            } else {
+                txt = 0;
+            }
+            $("#stuff").html(txt);
+            $("#resall").html(txt + " mins, or " + (txt / 60).toFixed(2) + " hrs.");
         });
     });
 }
@@ -68,12 +156,10 @@ function checkRads() {
 }
 
 $(button1).click(function updateTimeS() {
-    $("para").innerHTML = "hey";
-
     firebase.auth().onAuthStateChanged(function (user) {
         var val = 0;
-        if (parseInt(document.getElementById("value").value) > 0) {
-            val = parseInt(document.getElementById("value").value);
+        if (parseInt($("#value").val()) > 0) {
+            val = parseInt($("#value").val());
         }
         db.collection('users').doc(user.uid).set({
             "counts": (parseInt(counts) + val),
@@ -111,6 +197,7 @@ $(button1).click(function updateTimeS() {
             }, {
                 merge: true
             });
+
         } else if (checkRads() == 0) {
             db.collection('users').doc(user.uid).set({
                 "ttcounts": (parseInt(ttcounts) + val),
@@ -119,6 +206,7 @@ $(button1).click(function updateTimeS() {
             });
         }
 
+        $("#value").val(0);
 
 
 
@@ -147,12 +235,19 @@ $(clear).click(function clear() {
 
         });
     });
+    location.reload();
+});
+$("#Christmas").click(function () {
+    $(body).css("color", "green");
+    $("#bio").css("color", "green");
+    $("#name").css("color", "green");
+    $(body).css("background-image", "url(./images/santa.jpg)");
 });
 $("#logout").click(function () {
     firebase.auth().onAuthStateChanged(function (user) {
         firebase.auth().signOut().then(function () {
             // Sign-out successful.
-            window.location.replace("sign-in.html");
+            window.location.replace("index.html");
 
         }).catch(function (error) {
             // An error happened.

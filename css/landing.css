@@ -1,0 +1,26 @@
+   body {
+            background-image: url("../images/landing%20page.jpg");
+            background-repeat: repeat-y;
+            background-size: 100% auto;
+        }
+
+        #id1 {
+            font-size: 65px;
+            margin: 5%;
+            border: 10px
+        }
+
+        #id2 {
+            margin: 30px;
+            font-family: cursive;
+            font-size: 100px;
+            text-align: center;
+            color: black;
+        }
+
+        #id3 {
+            font-size: 150px;
+            font-family: cursive;
+            text-align: center;
+            color: black;
+        }

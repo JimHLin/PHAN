@@ -1,0 +1,10 @@
+   head {
+            background-color: deepskyblue
+        }
+
+        body {
+            background-image: url("../images/backimg3.jpg");
+            background-repeat: repeat-y;
+            background-size: 100% auto;
+        }
+    </style>
