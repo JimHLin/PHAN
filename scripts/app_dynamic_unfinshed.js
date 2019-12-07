@@ -1,19 +1,21 @@
-            var num =0;
-            var list;
+//Unfinishd upgrade.
+var num = 0;
+var list;
+
 function updateTimeC() {
     firebase.auth().onAuthStateChanged(function (user) {
         db.collection('users').doc(user.uid).onSnapshot(function (snap) {
             console.log('Current data is...', snap.data());
             list = snap.data()["apps"];
-            if(num < list.length){
+            if (num < list.length) {
                 var urlist = snap.data()["URL"];
                 var countlist = snap.data()["appCounts"];
                 for (var i = 0; i < list.length; i++) {
-//                    console.log(list[i]);
+                    //                    console.log(list[i]);
                     var id = ("app" + i);
-//                    console.log(id);
+                    //                    console.log(id);
                     var newdiv = $(document.createElement('div'));
-//                    newdiv.attr("id", id);
+                    //                    newdiv.attr("id", id);
                     var style = {
                         "padding": "0",
                         "width": "8%",
@@ -26,109 +28,22 @@ function updateTimeC() {
                     var inp = $(document.createElement('input'));
                     inp.attr("type", "radio");
                     $("#rads").append(lab);
-                                            
+
                     $("#results").append(tes);
                     $(newdiv).css("background-color", "gray");
                     $("#results").append(newdiv);
-                    
+
                 }
-            num = list.length;
+                num = list.length;
             }
             if (snap.get("counts") != null) {
                 txt = snap.data()["counts"];
-                
+
 
             }
             if (snap.get("counts") != null) {
                 txt = snap.data()["counts"];
-            }
-            //            if (snap.get("ttcounts") != null ){
-            //                var tttxt = snap.data()["ttcounts"];
-            //            per = ((tttxt/txt)*100) + "%";
-            //              style = {
-            //                    "position" : "relative",
-            //                "width" : per
-            //                };
-            //                                var te = "#ttbar";
-            //
-            //            $(te).css(style); 
-            //            }
-            //            else{
-            //                ttttxt = 0;
-            //            $("#ttbar").css("width", "0%");
-            //            }
-            //            if (snap.get("ytcounts") != null){
-            //                var yttxt = snap.data()["ytcounts"];
-            //            per = ((yttxt/txt)*100) + "%";
-            //              style = {
-            //                    "position" : "relative",
-            //                "width" : per
-            //                };
-            //            $("#ytbar").css(style); 
-            //            }
-            //            else{
-            //                yttxt = 0;}
-            //            if (snap.get("igcounts") != null){
-            //              var  igtxt = snap.data()["igcounts"];
-            //             per = ((igtxt/txt)*100) + "%";
-            //                if((igtxt/txt).isNaN){
-            //                console.log(igtxt/txt);
-            //
-            //                   style = {
-            //                    "position" : "relative",
-            //                "width" : "0%"
-            //                };
-            //                }else{
-            //              style = {
-            //                    "position" : "relative",
-            //                "width" : per
-            //                };}
-            //                $("#igshow").html(igtxt + "mins, or " + (igtxt/60).toFixed(2) + " hrs. " + (igtxt/txt*100).toFixed(2) + "% of total time.");
-            //            $("#igbar").css(style); 
-            //            }
-            //            else{
-            //                igtxt = 0;}
-            //            if (snap.get("rdcounts") != null){
-            //               var rdtxt = snap.data()["rdcounts"];
-            //             per = ((rdtxt/txt)*100) + "%";
-            //              style = {
-            //                    "position" : "relative",
-            //                "width" : per
-            //                };
-            //            $("#rdbar").css(style);
-            //            }
-            //            else{
-            //                rdtxt = 0;}
-            //            if (snap.get("fbcounts") != null){
-            //               var fbtxt = snap.data()["fbcounts"];
-            //            var per = ((fbtxt/txt)*100) + "%";
-            //                var test = document.getElementById("#fbbar");
-            //            var style = {
-            //                    "position" : "relative",
-            //                "width" : per
-            //                };
-            //                $("#fbbar").css(style);
-            //               
-            //            }
-            //            
-            //            else{
-            //                fbtxt = 0;
-            //                
-            //                
-            //            }
-            //            if (snap.get("otcounts") != null){
-            //                ottxt = snap.data()["otcounts"];
-            //                 per = ((ottxt/txt)*100) + "%";
-            //              style = {
-            //                    "position" : "relative",
-            //                "width" : per
-            //                };
-            //            $("#otbar").css(style);
-            //            }
-            //            else{
-            //                ottxt = 0;}
-            //            }
-            else {
+            } else {
                 txt = 0;
             }
             $("#stuff").html(txt);
@@ -136,29 +51,19 @@ function updateTimeC() {
         });
     });
 }
-var counts = 0;
-var ttcounts = 0;
-var igcounts = 0;
-var ytcounts = 0;
-var fbcounts = 0;
-var rdcounts = 0;
-var otcounts = 0;
 
-firebase.auth().onAuthStateChanged(function (user) {
 
-   
-});
 
 function checkRads() {
-   var test = "app1";
-for(var i = 0; i < list.length; i++){
-    var id = ("app" + i);
-    if(document.getElementById(id).checked){
-        return id.substring(3);
-    
-}   
+    var test = "app1";
+    for (var i = 0; i < list.length; i++) {
+        var id = ("app" + i);
+        if (document.getElementById(id).checked) {
+            return id.substring(3);
+
+        }
     }
-            return 1;
+    return 1;
 
 }
 
@@ -177,19 +82,13 @@ $(button1).click(function updateTimeS() {
             merge: true
         });
 
-//         db.collection('users').doc(user.uid).onSnapshot(function (snap) {
-//
-//        if (snap.get("counts") != null) {
-//            counts = snap.get("counts");
-//        }
-       
-//    });
-            db.collection('users').doc(user.uid).set({
-                "appCounts[checkRads()]": (parseInt(igcounts) + val),
-            }, {
-                merge: true
-            });
-       
+
+        db.collection('users').doc(user.uid).set({
+            "appCounts[checkRads()]": (parseInt(igcounts) + val),
+        }, {
+            merge: true
+        });
+
 
 
 
@@ -207,13 +106,7 @@ document.getElementById("value").addEventListener("keydown", function (event) {
 $(clear).click(function clear() {
     firebase.auth().onAuthStateChanged(function (user) {
         db.collection('users').doc(user.uid).set({
-            "counts": 0,
-            "ttcounts": 0,
-            "rdcounts": 0,
-            "igcounts": 0,
-            "otcounts": 0,
-            "fbcounts": 0,
-            "ytcounts": 0,
+
         }, {
             merge: true
 
@@ -232,3 +125,29 @@ $("#logout").click(function () {
         });
     });
 })
+
+function createUser() {
+
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        db.collection('users').doc(user.uid).onSnapshot(function (snap) {
+            if (snap.get("counts") == null) {
+                db.collection("users").doc(user.uid).set({
+                    "apps": ["Instagram", "Twitter", "Reddit", "Youtube", "Facebook"],
+                    "URL": ["https://workingwithdog.com/wp-content/uploads/2016/05/new_instagram_logo-1024x1024.jpg", "http://www.vectorsland.com/imgd/l62697-new-twitter-logo-49466.png", "https://www.redditinc.com/assets/images/site/reddit-logo.png", "https://i.pinimg.com/originals/de/1c/91/de1c91788be0d791135736995109272a.png", "https://en.facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png"],
+
+                }, {
+                    merge: true
+                });
+            }
+            db.collection("users").doc(user.uid).set({
+                "name": user.displayName,
+                "email": user.email,
+
+            }, {
+                merge: true
+            });
+
+        });
+    });
+}

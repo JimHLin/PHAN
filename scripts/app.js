@@ -1,3 +1,6 @@
+//Updates the client-side displays. This includes graphs and descriptions
+//of individual apps, and the total time. This function automatically
+//gets called on change in users' documents.
 function updateTimeC() {
     firebase.auth().onAuthStateChanged(function (user) {
         db.collection('users').doc(user.uid).onSnapshot(function (snap) {
@@ -16,7 +19,7 @@ function updateTimeC() {
                         "position": "relative",
                         "width": per
                     };
-                    $("#ttshow").html(tttxt + "mins, or " + (tttxt / 60).toFixed(2) + " hrs. " + (tttxt / txt * 100).toFixed(2) + "% of total time.");
+                    $("#ttshow").html(tttxt + " mins, or " + (tttxt / 60).toFixed(2) + " hrs. " + (tttxt / txt * 100).toFixed(2) + "% of total time.");
                     $("#ttbar").css(style);
                 } else {
                     ttttxt = 0;
@@ -30,7 +33,7 @@ function updateTimeC() {
                         "position": "relative",
                         "width": per
                     };
-                    $("#ytshow").html(yttxt + "mins, or " + (yttxt / 60).toFixed(2) + " hrs. " + (yttxt / txt * 100).toFixed(2) + "% of total time.");
+                    $("#ytshow").html(yttxt + " mins, or " + (yttxt / 60).toFixed(2) + " hrs. " + (yttxt / txt * 100).toFixed(2) + "% of total time.");
                     $("#ytbar").css(style);
                 } else {
                     yttxt = 0;
@@ -44,7 +47,7 @@ function updateTimeC() {
                         "position": "relative",
                         "width": per
                     };
-                    $("#igshow").html(igtxt + "mins, or " + (igtxt / 60).toFixed(2) + " hrs. " + (igtxt / txt * 100).toFixed(2) + "% of total time.");
+                    $("#igshow").html(igtxt + " mins, or " + (igtxt / 60).toFixed(2) + " hrs. " + (igtxt / txt * 100).toFixed(2) + "% of total time.");
                     $("#igbar").css(style);
                 } else {
                     igtxt = 0;
@@ -57,7 +60,7 @@ function updateTimeC() {
                         "position": "relative",
                         "width": per
                     };
-                    $("#rdshow").html(rdtxt + "mins, or " + (rdtxt / 60).toFixed(2) + " hrs. " + (rdtxt / txt * 100).toFixed(2) + "% of total time.");
+                    $("#rdshow").html(rdtxt + " mins, or " + (rdtxt / 60).toFixed(2) + " hrs. " + (rdtxt / txt * 100).toFixed(2) + "% of total time.");
                     $("#rdbar").css(style);
                 } else {
                     rdtxt = 0;
@@ -70,7 +73,7 @@ function updateTimeC() {
                         "position": "relative",
                         "width": per
                     };
-                    $("#fbshow").html(fbtxt + "mins, or " + (fbtxt / 60).toFixed(2) + " hrs. " + (fbtxt / txt * 100).toFixed(2) + "% of total time.");
+                    $("#fbshow").html(fbtxt + " mins, or " + (fbtxt / 60).toFixed(2) + " hrs. " + (fbtxt / txt * 100).toFixed(2) + "% of total time.");
                     $("#fbbar").css(style);
 
                 } else {
@@ -85,7 +88,7 @@ function updateTimeC() {
                         "position": "relative",
                         "width": per
                     };
-                    $("#otshow").html(ottxt + "mins, or " + (ottxt / 60).toFixed(2) + " hrs. " + (ottxt / txt * 100).toFixed(2) + "% of total time.");
+                    $("#otshow").html(ottxt + " mins, or " + (ottxt / 60).toFixed(2) + " hrs. " + (ottxt / txt * 100).toFixed(2) + "% of total time.");
                     $("#otbar").css(style);
                 } else {
                     ottxt = 0;
@@ -106,7 +109,8 @@ var ytcounts = 0;
 var fbcounts = 0;
 var rdcounts = 0;
 var otcounts = 0;
-
+//Records counts for individual categories. This function has the same condition as 
+//updateTimeC, and is only seperated for clarity.
 firebase.auth().onAuthStateChanged(function (user) {
 
     db.collection('users').doc(user.uid).onSnapshot(function (snap) {
@@ -132,13 +136,10 @@ firebase.auth().onAuthStateChanged(function (user) {
         if (snap.get("otcounts") != null) {
             otcounts = snap.get("otcounts");
         }
-        //                var graph = {
-        //                    
-        //                };
-        //               $("test").css();
+
     });
 });
-
+//Checks which radio button is checked.
 function checkRads() {
     if (document.getElementById("ttrad").checked) {
         return 0;
@@ -154,7 +155,8 @@ function checkRads() {
         return 5;
     }
 }
-
+//Updates firestore user data. This is what happens when
+//the "submit" button is clicked. Also clears input.
 $(button1).click(function updateTimeS() {
     firebase.auth().onAuthStateChanged(function (user) {
         var val = 0;
@@ -213,13 +215,14 @@ $(button1).click(function updateTimeS() {
 
     });
 });
-//Convenience.
+//Pressing "enter" when focused on input causes the same effect as "submit".
 document.getElementById("value").addEventListener("keydown", function (event) {
     if (event.keyCode === 13) {
         event.preventDefault();
         $(button1).click();
     }
 })
+//Called when "clear" button clicked. Resets all user data.
 $(clear).click(function clear() {
     firebase.auth().onAuthStateChanged(function (user) {
         db.collection('users').doc(user.uid).set({
@@ -237,6 +240,7 @@ $(clear).click(function clear() {
     });
     location.reload();
 });
+//Merry Christmas.
 $("#Christmas").click(function () {
     $(body).css("color", "green");
     $("#bio").css("color", "green");
@@ -247,6 +251,8 @@ $("#Christmas").click(function () {
     };
     $(body).css(backstyle);
 });
+//Called when "logout" option clicked.Logs out the user, and 
+//redirects back to the sign-in page.
 $("#logout").click(function () {
     firebase.auth().onAuthStateChanged(function (user) {
         firebase.auth().signOut().then(function () {
